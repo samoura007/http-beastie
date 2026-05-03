@@ -18,7 +18,13 @@ http::response<http::string_body> handle_request(const http::request<http::strin
     if (req.target() == "/") {
       res.result(http::status::ok);
       res.body() = utility("static/index.html");
-    } else {
+    } 
+else if (req.target() == "/ElMaadawi") {
+      res.result(http::status::ok);
+      res.body() = utility("static/ElMaadawi.html"); 
+    }
+
+    else {
       res.result(http::status::not_found);
       res.body() = "<h1 style=\"text-align: center;\">404 Not Found</h1>";
     }
@@ -34,7 +40,7 @@ http::response<http::string_body> handle_request(const http::request<http::strin
 std::string utility(const std::string& path){
     std::ifstream file(path);
     if(!file.is_open()){
-        return "";
+        return "file is not found";
     }
     std::stringstream buffer;
     buffer << file.rdbuf();
